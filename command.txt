@@ -1,0 +1,24 @@
+export HADOOP_CLASSPATH=$JAVA_HOME/lib/tools.jar
+
+# Compile command
+bin/hadoop com.sun.tools.javac.Main Similarity.java
+jar cf simi.jar Similarity*.class
+bin/hadoop jar simi.jar Similarity /user/hadoop/simitry/input  /user/hadoop/simitry/temp /user/hadoop/simitry/output
+
+# Lookup Command
+bin/hdfs dfs -ls /user/hadoop/simitry/output
+bin/hdfs dfs -cat /user/hadoop/simitry/output/part*
+
+# hdfs cp command
+bin/hadoop fs -copyFromLocal ../proj/1789.csv /user/hadoop/simitry/input
+
+# hdfs mkdir command
+bin/hdfs dfs -mkdir /user/hadoop/simitry/input
+
+# hdfs rm command
+bin/hdfs dfs -rm -R /user/hadoop/simitry/output
+
+
+
+
+
